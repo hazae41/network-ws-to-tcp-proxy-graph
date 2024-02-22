@@ -1,0 +1,29 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Registry
+    network: gnosis
+    source:
+      address: "0x23ece04af67cc4c484f3a4b136a6f97b76a12ebe"
+      abi: Registry
+      startBlock: 32533219
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Register
+        - Unregister
+      abis:
+        - name: Registry
+          file: Registry/abis/Registry.json
+      eventHandlers:
+        - event: Register(string)
+          handler: handleRegister
+        - event: Unregister(string)
+          handler: handleUnregister
+      file: Registry/Registry.wasm
