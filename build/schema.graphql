@@ -1,4 +1,4 @@
-type Data @entity(immutable: true) {
+type Data @entity {
   id: Bytes!
-  data: String!
+  data: String
 }

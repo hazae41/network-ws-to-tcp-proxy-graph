@@ -1,4 +1,4 @@
-import { Bytes, store } from "@graphprotocol/graph-ts"
+import { Bytes } from "@graphprotocol/graph-ts"
 
 import {
   Register as RegisterEvent,
@@ -14,5 +14,7 @@ export function handleRegister(event: RegisterEvent): void {
 }
 
 export function handleUnregister(event: UnregisterEvent): void {
-  store.remove("Data", Bytes.fromUTF8(event.params.data).toHexString())
+  const entity = Data.load(Bytes.fromUTF8(event.params.data))!
+  entity.data = null
+  entity.save()
 }
